@@ -1,0 +1,73 @@
+﻿<Window x:Class="ChromeControl.TestApp.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:commands="clr-namespace:ChromeControl.TestApp.ViewModel.Commands"
+        xmlns:commandsView="clr-namespace:ChromeControl.TestApp.View.Commands"
+        Title="Chrome Extension Demo" Height="600" Width="800" WindowState="Maximized">
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type commands:GetWindowCommandViewModel}" >
+            <commandsView:GetWindowIdsCommandView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type commands:GetTabIdsCommandViewModel}" >
+            <commandsView:GetTabIdsCommandView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type commands:GetTabIdsInWindowCommandViewModel}" >
+            <commandsView:GetTabIdsInWindowCommandView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type commands:OpenWindowCommand}" >
+            <commandsView:OpenWindowCommandView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type commands:OpenTabCommandViewModel}" >
+            <commandsView:OpenTabCommandView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type commands:GetUrlInTabCommandViewModel}" >
+            <commandsView:GetUrlCommandView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type commands:ChangeTabUrlCommandViewModel}" >
+            <commandsView:ChangeTabUrlCommandView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type commands:CloseWindowCommandViewModel}" >
+            <commandsView:CloseWindowCommandView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type commands:CloseTabCommandViewModel}" >
+            <commandsView:CloseTabCommandView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type commands:FocusWindowCommandViewModel}">
+            <commandsView:FocusWindowCommandView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type commands:MoveWindowCommand}">
+            <commandsView:MoveWindowCommandView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type commands:WindowStateCommandViewModel}">
+            <commandsView:WindowStateCommandView/>
+        </DataTemplate>
+		<DataTemplate DataType="{x:Type commands:GetWindowPositionCommandViewModel}">
+			<commandsView:GetWindowPositionCommandView/>
+		</DataTemplate>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <!--<Menu Grid.Row="0">
+            <MenuItem Header="File">
+                
+            </MenuItem>
+        </Menu>-->
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <ListView Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" ItemsSource="{Binding Path=Commands}" SelectedItem="{Binding Path=SelectedCommand, Mode=TwoWay}" DisplayMemberPath="CommandName"/>
+            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Path=DisplayText}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TextWrapping="Wrap" IsReadOnly="True"/>
+            <ContentControl Grid.Row="1" Grid.Column="1" Content="{Binding SelectedCommand}"/>
+        </Grid>
+    </Grid>
+</Window>
